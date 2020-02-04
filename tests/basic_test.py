@@ -19,8 +19,11 @@ class TestRests(unittest.TestCase):
         if _verbose:
             print(f"request returned {sdl.status_code}")
         ret = sdl.json()
+        self.assertTrue("id" in ret)
         self.assertEqual(ret["id"], object_id)
+        self.assertTrue("checksums" in ret)
         self.assertEqual(ret["checksums"][0]["type"], "md5")
+        self.assertTrue("access_methods" in ret)
         amtype = ret["access_methods"][0]["type"]
         self.assertTrue(amtype in ["s3", "gs"])
         self.assertGreater(ret["size"], 200000)
