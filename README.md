@@ -16,8 +16,8 @@ pip3 install -r requirements.txt -r test-requirements.txt
 # Pre-commit flight check
 pre-commit run --all-files
 
-# To build outside Jenkins:
-$ ./build.sh
+# To package outside Jenkins:
+$ ./package.sh
 
 # To run tests, container will listen on external port 80
 $ ./test.sh
