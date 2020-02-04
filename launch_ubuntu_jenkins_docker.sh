@@ -156,6 +156,7 @@ BRANCH_NAME=$(git symbolic-ref --short HEAD)
 echo "Run:"
 echo " ssh -2akx $login@$ip_addr"
 echo " cd ncbi-drs"
+echo " git checkout engineering" # In case current branch hasn't been pushed
 echo " git checkout $BRANCH_NAME"
 echo " docker build -t jenkins -f jenkins/Dockerfile ."
 echo " docker run --network host --detach --volume /var/run/docker.sock:/var/run/docker.sock jenkins"
