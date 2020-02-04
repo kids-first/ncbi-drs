@@ -21,7 +21,7 @@ echo "Running docker image $NAME, listening on host port $PORT"
 docker run --network host --detach --name "$NAME" drs
 sleep 5
 
-CID=$(docker ps -q --filter "name=$NAME")
+CID=$(docker ps --quiet --filter "name=$NAME")
 echo "container is $CID"
 
 # curl -s http://localhost:80/ga4gh/drs/v1/objects/SRRTESTTEST | jq -S '.'

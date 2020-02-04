@@ -44,7 +44,7 @@ CMD /usr/sbin/apache2ctl -D FOREGROUND
 # ____________
 #
 # sudo docker build - < Dockerfile
-# sudo docker build -t ubuntu . # Creates image
+# sudo docker build --tag ubuntu . # Creates image
 # sudo docker images # Lists images
 # sudo docker save -o out.tar image # image to tar
 # sudo docker run -it image-id # Creates container from image and runs

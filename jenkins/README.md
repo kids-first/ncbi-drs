@@ -2,7 +2,7 @@
 
 tl;dr
 
-Run docker with **`-v /var/run/docker.sock:/var/run/docker.sock`** to forward docker-in-docker to the host.
+Run docker with **`--volume /var/run/docker.sock:/var/run/docker.sock`** to forward docker-in-docker to the host.
 
 ## EC2 Setup
 
@@ -28,7 +28,7 @@ sudo chmod ugo+w /var/run/docker.sock
 git clone <this/repo>
 cd <this/repo/jenkins>
 # scp ~vartanianmh/jenkins_drs.tar ec2user@ip:ncbi-drs/jenkins
-docker build -t jenkins .
+docker build --tag jenkins .
 ```
 
 #### Start Jenkins docker
