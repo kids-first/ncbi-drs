@@ -27,7 +27,7 @@ class TestRests(unittest.TestCase):
         amtype = ret["access_methods"][0]["type"]
         self.assertTrue(amtype in ["s3", "gs"])
         self.assertGreater(ret["size"], 200000)
-        self.assertTrue(ret["self_uri"].startswith("http"))
+        self.assertTrue(ret["self_uri"].startswith("http://localhost"))
         self.assertRegex(ret["created_time"], r"\d{4}-\d{2}-\d{2}T")
 
 
