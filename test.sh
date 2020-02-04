@@ -37,7 +37,7 @@ echo "Killing docker images"
 docker kill "$CID"
 docker container rm "$CID"
 
-docker kill "$TEST_NAME"
+docker kill "$TEST_NAME" || true
 docker image rm -f "$TEST_NAME"
 
 exit $RET
