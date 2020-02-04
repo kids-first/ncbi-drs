@@ -13,27 +13,31 @@ fi
 PORT=80
 NAME="${BRANCH_NAME}_${GIT_COMMIT:0:6}_$RANDOM"
 NAME="${NAME,,}" # Docker tags must be lowercase
+TEST_NAME="test_$NAME"
 
 cd tests
 
 # Start the DRS server
-echo "Running docker image $NAME, listening on host port $PORT"
+echo "Running server docker image $NAME, listening on host port $PORT"
 docker run --network host --detach --name "$NAME" drs
-sleep 5
-
+sleep 2
 CID=$(docker ps --quiet --filter "name=$NAME")
 echo "container is $CID"
 
 # curl -s http://localhost:80/ga4gh/drs/v1/objects/SRRTESTTEST | jq -S '.'
 
 # Building and start running tests in container
-docker build --tag "tests_$NAME" .
-docker run --network host --name "tests_$NAME" "tests_$NAME"
+echo "Running testing docker image $TEST_NAME"
+docker build --tag "$TEST_NAME" .
+docker run --network host --name "$TEST_NAME" "$TEST_NAME"
 RET=$?
-echo "containter returned $RET"
+echo "testing containter returned $RET"
 
 echo "Killing docker images"
 docker kill "$CID"
 docker container rm "$CID"
+
+docker kill "$TEST_NAME"
+docker image rm -f "$TEST_NAME"
 
 exit $RET
