@@ -24,6 +24,7 @@ sleep 5
 CID=$(docker ps -q --filter "name=$NAME")
 echo "container is $CID"
 
+# curl -s http://localhost:80/ga4gh/drs/v1/objects/SRRTESTTEST | jq -S '.'
 
 # Building and start running tests in container
 docker build --tag "tests_$NAME" .
