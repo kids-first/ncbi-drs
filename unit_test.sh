@@ -22,6 +22,7 @@ echo "Running unit tests"
 python3 -m unittest ga4gh/drs/server.py
 nosetests
 
+echo "Running uwsgi on port $PORT"
 #~/.local/bin/uwsgi --http ":$PORT" --wsgi-file drs.py &
 uwsgi --logto "$LOG" --http ":$PORT" --wsgi-file drs.py &
 
@@ -45,7 +46,7 @@ else
     RET=1
 fi
 
-echo "Killing uwsgi"
+echo "Killing uwsgi on port $PORT"
 kill %1
 
 # Run mock server
