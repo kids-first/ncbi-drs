@@ -10,14 +10,15 @@ fi
 
 readonly INSTANCE="t3a.micro" # nano doesn't have enough RAM, ~23 cents/day
 readonly KEY_NAME=$USER
-readonly SUBNET=subnet-4f505738
-readonly SGID=sg-5d37473a
+readonly SUBNET=subnet-4f505738 # In NCBI-VDB-Software network, us-east-1a
+readonly SGID=sg-5d37473a # TCP:22,80,443,3389
 # sg-a53e35ce allows 0.0.0.0:8080
-# sg-5d37473a allows RDP (3389)
 readonly EXPIRES="480" # in minutes
 
 # https://cloud-images.ubuntu.com/locator/ec2/
 AMI="ami-00a208c7cdba991ea" # Ubuntu 18.04 LTS, good until 2023-ish
+# ami-046842448f9e74e7d
+# ami-07ebfd5b3428b6f4d
 
 distro="Ubuntu 18.04 LTS"
 titledistro="$distro"
@@ -91,6 +92,15 @@ cat > "$json" << ENDJSON
     "SecurityGroupIds": [ "$SGID" ],
     "SubnetId": "$SUBNET",
     "InstanceInitiatedShutdownBehavior": "terminate",
+    "BlockDeviceMappings": [
+        {
+            "DeviceName": "/dev/sda1",
+            "Ebs": {
+                "DeleteOnTermination": true,
+                "VolumeSize": 80
+            }
+        }
+    ],
     "TagSpecifications": [
     {
         "ResourceType": "instance",
