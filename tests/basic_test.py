@@ -13,7 +13,7 @@ class TestRests(unittest.TestCase):
         HTTPPORT = os.environ.get("HTTPPORT", "80")
         SERVER = f"http://localhost:{HTTPPORT}/"
         headers = {"Authorization": "authme"}
-        object_id = "SRRTESTTEST"
+        object_id = "SRR000000"
         url = SERVER + f"/ga4gh/drs/v1/objects/{object_id}"
         print(f"testbasic trying: {url}")
         sdl = requests.get(url, headers=headers)

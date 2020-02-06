@@ -31,7 +31,7 @@ sleep 2
 CID=$(docker ps --quiet --filter "name=$NAME")
 echo "container is $CID"
 
-# curl -s http://localhost:80/ga4gh/drs/v1/objects/SRRTESTTEST | jq -S '.'
+# curl -s http://localhost:80/ga4gh/drs/v1/objects/SRR000000 | jq -S '.'
 
 # Building and start running tests in container
 echo "Running testing docker image $TEST_NAME"
