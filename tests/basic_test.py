@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 
+import os
 import requests
 import sys
 import unittest
-
-SERVER = "http://localhost:80/"
 
 _verbose = False
 
 
 class TestRests(unittest.TestCase):
     def testbasic(self):
+        HTTPPORT = os.environ.get("HTTPPORT", "80")
+        SERVER = f"http://localhost:{HTTPPORT}/"
         headers = {"Authorization": "authme"}
         object_id = "SRRTESTTEST"
-        sdl = requests.get(
-            SERVER + f"/ga4gh/drs/v1/objects/{object_id}", headers=headers
-        )
+        url = SERVER + f"/ga4gh/drs/v1/objects/{object_id}"
+        print(f"testbasic trying: {url}")
+        sdl = requests.get(url, headers=headers)
         if _verbose:
             print(f"request returned {sdl.status_code}")
         ret = sdl.json()

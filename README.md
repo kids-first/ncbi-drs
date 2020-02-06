@@ -21,3 +21,6 @@ $ ./package.sh
 
 # To run tests, container will listen on external port 80
 $ ./test.sh
+
+# To run container, listening on port 80
+docker run --publish 80:80 --detach drs

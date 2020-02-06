@@ -71,10 +71,6 @@ sudo apt-get install -y docker.io python3 python3-pip \
              git shellcheck jq \
              protobuf-compiler
 
-#sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-#sudo iptables -A PREROUTING -t nat -i ens5 -p tcp --dport 80 -j REDIRECT --to-port 8080
-
-
 sudo usermod -aG docker ubuntu
 sudo chmod ugo+w /var/run/docker.sock
 ENDSCRIPT

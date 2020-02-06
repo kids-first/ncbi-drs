@@ -13,7 +13,14 @@ if [[ -z ${GIT_COMMIT+x} ]]; then
     GIT_COMMIT="none"
 fi
 
-PORT=$((RANDOM+1024))
+if [[ -z ${BUILD_NUMBER+x} ]]; then
+    BUILD_NUMBER=$RANDOM
+fi
+
+if [[ -z ${HTTPPORT+x} ]]; then
+    HTTPPORT=$((BUILD_NUMBER+1024))
+fi
+
 LOG="/tmp/uwsgi_$USER.log"
 rm -f "$LOG"
 
@@ -22,13 +29,12 @@ echo "Running unit tests"
 python3 -m unittest ga4gh/drs/server.py
 nosetests
 
-echo "Running uwsgi on port $PORT"
-#~/.local/bin/uwsgi --http ":$PORT" --wsgi-file drs.py &
-uwsgi --logto "$LOG" --http ":$PORT" --wsgi-file drs.py &
+echo "Running uwsgi on port $HTTPPORT"
+uwsgi --logto "$LOG" --http ":$HTTPPORT" --wsgi-file drs.py &
 
 sleep 2
 RET=0
-out=$(curl -s http://localhost:$PORT/)
+out=$(curl -s http://localhost:$HTTPPORT/)
 
 if [[ "$out" =~ "Hello, Apache!" ]]; then
     echo "OK"
@@ -37,7 +43,7 @@ else
     RET=1
 fi
 
-out=$(curl -s -H 'Authorization: authme' http://localhost:$PORT/ga4gh/drs/v1/objects/1234 | jq -S '.')
+out=$(curl -s -H 'Authorization: authme' http://localhost:$HTTPPORT/ga4gh/drs/v1/objects/1234 | jq -S '.')
 # Should return "md5": "aa8fbf47c010ee82e783f52f9e7a21d0",
 if [[ "$out" =~ "aa8fbf47c010ee82e783f52f9e7a21d0" ]]; then
     echo "OK results were: $out"
@@ -46,7 +52,7 @@ else
     RET=1
 fi
 
-echo "Killing uwsgi on port $PORT"
+echo "Killing uwsgi on port $HTTPPORT"
 kill %1
 
 # Run mock server

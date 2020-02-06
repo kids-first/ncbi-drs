@@ -25,6 +25,7 @@
 import connexion
 import datetime
 import logging
+import os
 import requests
 import unittest
 import re
@@ -329,7 +330,8 @@ def _GetCloud():
         HOST = "169.254.169.254"
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(0.100)
-        sock.connect((HOST, 80))
+        HTTPPORT = os.environ.get("HTTPPORT", "80")
+        sock.connect((HOST, HTTPPORT))
         sock.close()
         return _GetAWS_CE
     except:
