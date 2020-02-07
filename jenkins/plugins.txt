@@ -1,5 +1,6 @@
 workflow-aggregator:latest
 blueocean:latest
-pipeline-maven:latest
-configuration-as-code-support:latest
+pipeline:latest
+workflow-multibranch:latest
+configuration-as-code:latest
 job-dsl:latest

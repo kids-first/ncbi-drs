@@ -1,8 +1,5 @@
 # Jenkins in docker
 
-tl;dr
-
-Run docker with **`--volume /var/run/docker.sock:/var/run/docker.sock`** to forward docker-in-docker to the host.
 
 ## EC2 Setup
 
@@ -27,24 +24,17 @@ sudo chmod ugo+w /var/run/docker.sock
 ```
 git clone <this/repo>
 cd <this/repo/jenkins>
-# scp ~vartanianmh/jenkins_drs.tar ec2user@ip:ncbi-drs/jenkins
 docker build --tag jenkins .
 ```
 
 #### Start Jenkins docker
 
 ```
-docker run --detach --network host --volume /var/run/docker.sock:/var/run/docker.sock jenkins
+docker run --detach --publish 443:8080 jenkins
 
 sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080
-
 sudo iptables -A PREROUTING -t nat -i ens5 -p tcp --dport 443 -j REDIRECT --to-port 8080
+# GCP usually uses eth0, AWS ens5. Both harmless
 ```
 
 Jenkins should now be running on http://1.2.3.4:443/
-
-----
-
-### See:
-
-[Using Docker-in-Docker for your CI or testing environment? Think twice.](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)
