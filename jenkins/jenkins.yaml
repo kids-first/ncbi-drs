@@ -66,7 +66,7 @@ jobs:
                   scm {
                     git {
                         remote { url 'https://github.com/ncbi/ncbi-drs.git' }
-                        branch '*/engineering'
+                        branch 'VDB-4108'
                         extensions {}
                     }
                   }
