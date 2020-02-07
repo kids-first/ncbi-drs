@@ -1,5 +1,7 @@
 blueocean:latest
-configuration-as-code:latest
+bouncycastle-api:latest
+command-launcher:latest
+configuration-as-code-support:latest
 job-dsl:latest
 workflow-aggregator:latest
 workflow-multibranch:latest
