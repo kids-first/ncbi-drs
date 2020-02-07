@@ -52,16 +52,15 @@ unclassified:
 tool:
   git:
     installations:
-      - name: git
-        home: /usr/bin/git
-
+      - name: Default
+        home: "git"
 jobs:
   - script: >
       pipelineJob('pipeline') {
           definition {
               triggers {
                   cron('H/5 * * * *')
-              }
+                  }
               cpsScm {
                   scriptPath 'Jenkinsfile'
                   scm {
