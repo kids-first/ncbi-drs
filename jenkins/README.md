@@ -37,4 +37,5 @@ sudo iptables -A PREROUTING -t nat -i ens5 -p tcp --dport 443 -j REDIRECT --to-p
 # GCP usually uses eth0, AWS ens5. Both harmless
 ```
 
-Jenkins should now be running on http://1.2.3.4:443/
+Jenkins should now be running on http://1.2.3.4:443/ or
+http://1.2.3.4:443/blue/
