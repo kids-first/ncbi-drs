@@ -1,4 +1,5 @@
 jenkins:
+  systemMessage: "Configured automagically"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
@@ -53,3 +54,20 @@ tool:
     installations:
       - name: git
         home: /usr/bin/git
+
+jobs:
+  - script: >
+      pipelineJob('pipeline') {
+          definition {
+              cpsScm {
+                  scriptPath 'Jenkinsfile'
+                  scm {
+                    git {
+                        remote { url 'https://github.com/ncbi-drs/ncbi-drs.git' }
+                        branch '*/engineering'
+                        extensions {}
+                    }
+                  }
+              }
+          }
+      }
