@@ -59,11 +59,14 @@ jobs:
   - script: >
       pipelineJob('pipeline') {
           definition {
+              triggers {
+                  cron('H/5 * * * *')
+              }
               cpsScm {
                   scriptPath 'Jenkinsfile'
                   scm {
                     git {
-                        remote { url 'https://github.com/ncbi-drs/ncbi-drs.git' }
+                        remote { url 'https://github.com/ncbi/ncbi-drs.git' }
                         branch '*/engineering'
                         extensions {}
                     }
