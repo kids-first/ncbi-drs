@@ -54,3 +54,22 @@ tool:
     installations:
       - name: Default
         home: "git"
+jobs:
+  - script: >
+      pipelineJob('pipeline') {
+          definition {
+              triggers {
+                  cron('H/5 * * * *')
+              }
+              cpsScm {
+                  scriptPath 'Jenkinsfile'
+                  scm {
+                    git {
+                        remote { url 'https://github.com/ncbi/ncbi-drs.git' }
+                        branch 'VDB-4108'
+                        extensions {}
+                    }
+                  }
+              }
+          }
+      }
