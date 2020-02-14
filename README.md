@@ -7,10 +7,10 @@ An implementation of GA4GH's Data Repository Service (DRS).
 sudo apt-get install python3 python3-pip shellcheck jq protobuf-compiler
 ```
 
-# If running on Amazon Linux:
+# If running on Amazon Linux 2:
 ```bash
-sudo yum -y install python3-devel
-# and remove "python3.6" from .pre-commit-config.yaml
+sudo yum -y install python3-devel git gcc-c++
+pip3 install -r requirements.txt -r test-requirements.txt
 ```
 
 # Python prerequisites
