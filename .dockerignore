@@ -1,6 +1,6 @@
+README.md
 venv/
-*.py[cod]
-*$py.class
+*.pyc
 __pycache__/
 instance/
 .pytest_cache/
@@ -9,6 +9,6 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-*.log
-*.tar
-*.swp
+drs_app.log
+launch_ubuntu_jenkins_docker.sh
+launch_jenkins_ubuntu.sh
