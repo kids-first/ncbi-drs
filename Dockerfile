@@ -36,6 +36,9 @@ RUN echo "LogLevel info" >> /etc/apache2/apache2.conf
 RUN echo "ServerSignature Off" >> /etc/apache2/apache2.conf
 RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf
 
+RUN ln -sf /proc/$$/fd/1 /var/log/apache2/access.log
+RUN ln -sf /proc/$$/fd/2 /var/log/apache2/error.log
+
 EXPOSE 80
 
 CMD /usr/sbin/apache2ctl -D FOREGROUND
